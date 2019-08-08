@@ -107,7 +107,13 @@ var Parsely = function(){
                         var _yr = to_append.getFullYear();
                         to_append = _yr + "-" + _mt + "-" + _dt;
                     }
-                    url += key + "=" + to_append + "&";
+                    if (key === "tag" && Object.prototype.toString.call(to_append) === "[object Array]") {
+                        for (var i in to_append) {
+                            url += key + "=" + to_append[i] + "&";
+                        }
+                    } else {
+                        url += key + "=" + to_append + "&";
+                    }
                 }
             }
         }
